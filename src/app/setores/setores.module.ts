@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table';
 
 import { SetoresRoutingModule } from './setores-routing.module';
 import { SetoresComponent } from './setores/setores.component';
@@ -11,7 +12,8 @@ import { SetoresComponent } from './setores/setores.component';
   ],
   imports: [
     CommonModule,
-    SetoresRoutingModule
+    SetoresRoutingModule,
+    MatTableModule
   ]
 })
 export class SetoresModule { }
