@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Setor } from '../model/setor';
+import { SetoresService } from '../services/setores.service';
 
 @Component({
   selector: 'app-setores',
@@ -8,13 +9,13 @@ import { Setor } from '../model/setor';
 })
 export class SetoresComponent implements OnInit{
 	
-	setores: Setor[] = [ {_id: '1', nome: '"AÇÕES(BRASIL)"', porcentagem: 55.00, valor: 36252.63}];
+	setores: Setor[] = [];
 	
 	displayedColumns = ['nome','porcentagem','valor'];
 	
-	constructor() { }
+	constructor(private setoresService: SetoresService ) { }
 	
     ngOnInit(): void {
-
+		this.setores = this.setoresService.list();
     }
 }
