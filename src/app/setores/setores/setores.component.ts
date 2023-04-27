@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Setor } from '../model/setor';
 import { SetoresService } from '../services/setores.service';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-setores',
@@ -14,9 +16,22 @@ export class SetoresComponent implements OnInit{
 	
 	displayedColumns = ['nome','porcentagem','valor'];
 	
-	constructor(private setoresService: SetoresService ) { 
-		this.setores$ = this.setoresService.list();
+	constructor(
+		private setoresService: SetoresService,
+		public dialog: MatDialog ) { 
+		this.setores$ = this.setoresService.list().pipe(
+			catchError(error => {
+				this.onError('Erro ao carregar os setores!');
+				return of([])
+			})
+		);
 	}
+	
+	onError(errorMsg: string) {
+		this.dialog.open(ErrorDialogComponent, {
+			data: errorMsg,
+		});
+  }
 	
     ngOnInit(): void {
     }
