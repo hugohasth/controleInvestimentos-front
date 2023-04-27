@@ -2,19 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Setor } from '../model/setor';
+import { first, tap } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
 })
 
 export class SetoresService {
+	
+	private readonly uri = '/assets/setores.json'
 
 	constructor(private httpClient : HttpClient) { }
 
-	list(): Setor[] {
-		return [
-			{ _id: '1', nome: 'AÇÕES (BRASIL)', porcentagem: 55.00, valor: 36075.49 },
-			{ _id: '1', nome: 'AÇÕES (USA)', porcentagem: 35.00, valor: 4550.83 }
-		];
+	list() {
+		return this.httpClient.get<Setor[]>(this.uri).pipe(first(), tap(setores => console.log(setores)));
 	}
 }

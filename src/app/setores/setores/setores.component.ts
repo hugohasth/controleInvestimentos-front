@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Setor } from '../model/setor';
 import { SetoresService } from '../services/setores.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-setores',
@@ -9,13 +10,14 @@ import { SetoresService } from '../services/setores.service';
 })
 export class SetoresComponent implements OnInit{
 	
-	setores: Setor[] = [];
+	setores: Observable<Setor[]>;
 	
 	displayedColumns = ['nome','porcentagem','valor'];
 	
-	constructor(private setoresService: SetoresService ) { }
+	constructor(private setoresService: SetoresService ) { 
+		this.setores = this.setoresService.list();
+	}
 	
     ngOnInit(): void {
-		this.setores = this.setoresService.list();
     }
 }
