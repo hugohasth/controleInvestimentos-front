@@ -10,12 +10,12 @@ import { Observable } from 'rxjs';
 })
 export class SetoresComponent implements OnInit{
 	
-	setores: Observable<Setor[]>;
+	setores$: Observable<Setor[]>;
 	
 	displayedColumns = ['nome','porcentagem','valor'];
 	
 	constructor(private setoresService: SetoresService ) { 
-		this.setores = this.setoresService.list();
+		this.setores$ = this.setoresService.list();
 	}
 	
     ngOnInit(): void {
