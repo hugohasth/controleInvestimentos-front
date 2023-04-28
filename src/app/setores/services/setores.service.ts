@@ -15,6 +15,6 @@ export class SetoresService {
 	constructor(private httpClient : HttpClient) { }
 
 	list() {
-		return this.httpClient.get<Setor[]>(this.uri).pipe(first(), delay(5000), tap(setores => console.log(setores)));
+		return this.httpClient.get<Setor[]>(this.uri).pipe(first(), delay(10), tap(setores => console.log(setores)));
 	}
 }
