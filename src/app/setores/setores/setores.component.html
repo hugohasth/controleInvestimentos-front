@@ -6,7 +6,9 @@
 			<!-- Nome Column -->
 			<ng-container matColumnDef="nome">
 			<th mat-header-cell *matHeaderCellDef>Nome</th>
-			<td mat-cell *matCellDef="let element">{{element.nome}}</td>
+			<td mat-cell *matCellDef="let element">{{element.nome}}
+				<mat-icon aria-hidden="false" aria-label="Nome">{{ element.nome | setor }}</mat-icon>
+			</td>
 			</ng-container>
 		
 			<!-- Porcentagem Column -->
