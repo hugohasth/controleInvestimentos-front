@@ -10,7 +10,7 @@ import { delay, first, tap } from 'rxjs';
 
 export class SetoresService {
 	
-	private readonly uri = '/assets/setores.json'
+	private readonly uri = '/api/setores'
 
 	constructor(private httpClient : HttpClient) { }
 
