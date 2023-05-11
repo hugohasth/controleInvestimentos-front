@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, FormBuilder } from '@angular/forms';
 import { SetoresService } from '../services/setores.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-setor-form',
@@ -10,17 +11,18 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class SetorFormComponent {
 	
-	form: FormGroup;
+	form = this.formBuilder.group({
+			nome: new FormControl<string|null|undefined>(''),
+			porcentagem: new FormControl<number|null|undefined>(null),
+			valor: new FormControl<number|null|undefined>(null)
+		});
 	
 	constructor(
 		private formBuilder: FormBuilder,
 		private service: SetoresService,
-		private snackBar: MatSnackBar) {
-		this.form = this.formBuilder.group({
-			nome: [null],
-			porcentagem: [null],
-			valor: [null]
-		});
+		private snackBar: MatSnackBar,
+		private location: Location) {
+			
 	}
 	
 	ngOnInit(): void {
@@ -28,11 +30,16 @@ export class SetorFormComponent {
 	}
 	
 	onSubmit() {
-		this.service.save(this.form.value).subscribe(result => console.log(result), error => this.onError());
+		this.service.save(this.form.value).subscribe(result => this.onSucces(), error => this.onError());
 	}
 	
 	onCancel() {
-		
+		this.location.back();
+	}
+	
+	onSucces() {
+		this.snackBar.open('Setor salvo com sucesso!', '', { duration: 5000 });
+		this.onCancel();
 	}
 	
 	onError() {

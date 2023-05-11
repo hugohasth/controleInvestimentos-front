@@ -18,7 +18,7 @@ export class SetoresService {
 		return this.httpClient.get<Setor[]>(this.uri).pipe(first(), delay(10), tap(setores => console.log(setores)));
 	}
 	
-	save(setor: Setor) {
+	save(setor: Partial<Setor>) {
 		return this.httpClient.post<Setor>(this.uri, setor);
 	}
 }
