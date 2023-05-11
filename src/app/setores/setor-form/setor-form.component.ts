@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, FormBuilder } from '@angular/forms';
 import { SetoresService } from '../services/setores.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
@@ -11,18 +11,18 @@ import { Location } from '@angular/common';
 })
 export class SetorFormComponent {
 	
-	form: FormGroup;
+	form = this.formBuilder.group({
+			nome: new FormControl<string|null|undefined>(''),
+			porcentagem: new FormControl<number|null|undefined>(null),
+			valor: new FormControl<number|null|undefined>(null)
+		});
 	
 	constructor(
 		private formBuilder: FormBuilder,
 		private service: SetoresService,
 		private snackBar: MatSnackBar,
 		private location: Location) {
-		this.form = this.formBuilder.group({
-			nome: [null],
-			porcentagem: [null],
-			valor: [null]
-		});
+			
 	}
 	
 	ngOnInit(): void {
