@@ -7,12 +7,14 @@ import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { SharedModule } from '../shared/shared.module';
 import { SetorFormComponent } from './setor-form/setor-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SetoresListComponent } from './setores-list/setores-list.component';
 
 
 @NgModule({
   declarations: [
     SetoresComponent,
-    SetorFormComponent
+    SetorFormComponent,
+    SetoresListComponent
   ],
   imports: [
     CommonModule,
