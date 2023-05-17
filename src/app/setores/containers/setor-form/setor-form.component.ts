@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder } from '@angular/forms';
-import { SetoresService } from '../services/setores.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
+import { SetoresService } from '../../services/setores.service';
 
 @Component({
   selector: 'app-setor-form',

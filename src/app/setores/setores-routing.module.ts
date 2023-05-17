@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SetoresComponent } from './setores/setores.component';
-import { SetorFormComponent } from './setor-form/setor-form.component';
+import { SetoresComponent } from './containers/setores/setores.component';
+import { SetorFormComponent } from './containers/setor-form/setor-form.component';
 
 const routes: Routes = [
 	{
