@@ -44,4 +44,8 @@ export class SetoresComponent implements OnInit{
     onAdd() {
 		this.router.navigate(['new'], {relativeTo: this.route});
 	}
+    
+    onEdit(setor: Setor) {
+		this.router.navigate(['edit', setor._id], {relativeTo: this.route});
+	}
 }

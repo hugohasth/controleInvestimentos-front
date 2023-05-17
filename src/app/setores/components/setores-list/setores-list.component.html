@@ -30,7 +30,8 @@
 			</button>
 		</mat-header-cell>
 		<mat-cell *matCellDef="let element" class="action-column">
-			<button mat-icon-button color="primary" arial-label="Editar setor">
+			<button mat-icon-button color="primary" arial-label="Editar setor"
+				(click)="onEdit(element)">
 				<mat-icon>edit</mat-icon>
 			</button>
 			<button mat-icon-button color="primary" arial-label="Apagar setor">

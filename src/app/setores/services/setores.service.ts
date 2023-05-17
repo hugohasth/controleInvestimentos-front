@@ -21,4 +21,8 @@ export class SetoresService {
 	save(setor: Partial<Setor>) {
 		return this.httpClient.post<Setor>(this.uri, setor);
 	}
+	
+	loadById(id: string) {
+		return this.httpClient.get<Setor>(`${this.uri}/${id}`);
+	}
 }
