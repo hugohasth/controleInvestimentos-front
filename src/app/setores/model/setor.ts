@@ -1,6 +1,6 @@
 export interface Setor {
 	_id: string;
-	nome: string|null|undefined;
+	nome: string;
 	porcentagem: number|null|undefined;
 	valor: number|null|undefined;
 }
