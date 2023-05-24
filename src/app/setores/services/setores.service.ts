@@ -19,7 +19,18 @@ export class SetoresService {
 	}
 	
 	save(setor: Partial<Setor>) {
-		return this.httpClient.post<Setor>(this.uri, setor);
+		if(setor._id) {
+			return this.update(setor);
+		}
+		return this.create(setor);
+	}
+	
+	private create(setor: Partial<Setor>) {
+		return this.httpClient.post<Setor>(this.uri, setor).pipe(first());
+	}
+	
+	private update(setor: Partial<Setor>) {
+		return this.httpClient.put<Setor>(`${this.uri}/${setor._id}`, setor).pipe(first());		
 	}
 	
 	loadById(id: string) {
