@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
 import { AppMaterialModule } from './app-material/app-material.module';
 import { SetorPipe } from './pipes/setor.pipe';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 
 
 @NgModule({
 	declarations: [
 		ErrorDialogComponent,
-		SetorPipe
+		SetorPipe,
+  		ConfirmationDialogComponent
 	],
 	imports: [
 		CommonModule,
@@ -17,6 +19,7 @@ import { SetorPipe } from './pipes/setor.pipe';
 	],
 	exports: [
 		ErrorDialogComponent,
+  		ConfirmationDialogComponent,
 		SetorPipe
 	]
 })
