@@ -11,6 +11,7 @@ export class SetoresListComponent {
 	@Input() setores: Setor[] = [];
 	@Output() add = new EventEmitter(false);
 	@Output() edit = new EventEmitter(false);
+	@Output() remove = new EventEmitter(false);
 
 	displayedColumns = ['nome', 'porcentagem', 'valor', 'actions'];
 
@@ -26,6 +27,10 @@ export class SetoresListComponent {
     
     onEdit(setor: Setor) {
 		this.edit.emit(setor);
+	}
+    
+    onRemove(setor: Setor) {
+		this.remove.emit(setor);
 	}
 
 }

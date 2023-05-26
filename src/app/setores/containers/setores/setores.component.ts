@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { SetoresService } from '../../services/setores.service';
 import { Setor } from '../../model/setor';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-setores',
@@ -14,7 +16,7 @@ import { Setor } from '../../model/setor';
 })
 export class SetoresComponent implements OnInit{
 	
-	setores$: Observable<Setor[]>;
+	setores$: Observable<Setor[]>|null = null;
 	
 	displayedColumns = ['nome','porcentagem','valor','actions'];
 	
@@ -22,7 +24,12 @@ export class SetoresComponent implements OnInit{
 		private setoresService: SetoresService,
 		public dialog: MatDialog,
 		private router: Router,
-		private route: ActivatedRoute ) { 
+		private route: ActivatedRoute,
+		private snackBar: MatSnackBar ) { 
+			this.refresh();
+	}
+	
+	refresh() {
 		this.setores$ = this.setoresService.list().pipe(
 			catchError(error => {
 				this.onError('Erro ao carregar os setores!');
@@ -35,7 +42,7 @@ export class SetoresComponent implements OnInit{
 		this.dialog.open(ErrorDialogComponent, {
 			data: errorMsg,
 		});
-  }
+  	}
 	
     ngOnInit(): void {
 		console.log('Componente SetoresComponent criado!');
@@ -47,5 +54,30 @@ export class SetoresComponent implements OnInit{
     
     onEdit(setor: Setor) {
 		this.router.navigate(['edit', setor._id], {relativeTo: this.route});
+	}
+    
+    onRemove(setor: Setor) {
+
+		const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+			data: 'Tem certeza que deseja remover esse setor?',
+		});
+
+		dialogRef.afterClosed().subscribe((result: boolean) => {
+			if (result) {
+				this.setoresService.remove(setor._id).subscribe(
+					() => {
+						this.refresh();
+						this.snackBar.open('Setor removido com sucesso!', 'X', {
+							duration: 5000,
+							verticalPosition: 'top',
+							horizontalPosition: 'center'
+						});
+					},
+					() => this.onError('Erro ao tentar remover setor.')
+				);
+			}
+		});
+	    
+		
 	}
 }

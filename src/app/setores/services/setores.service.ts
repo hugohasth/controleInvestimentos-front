@@ -33,6 +33,10 @@ export class SetoresService {
 		return this.httpClient.put<Setor>(`${this.uri}/${setor._id}`, setor).pipe(first());		
 	}
 	
+	remove(id: string) {
+		return this.httpClient.delete(`${this.uri}/${id}`).pipe(first());		
+	}
+	
 	loadById(id: string) {
 		return this.httpClient.get<Setor>(`${this.uri}/${id}`);
 	}
