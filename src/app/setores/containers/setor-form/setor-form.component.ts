@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormBuilder } from '@angular/forms';
+import { FormControl, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
 import { SetoresService } from '../../services/setores.service';
@@ -16,9 +16,9 @@ export class SetorFormComponent {
 	
 	form = this.formBuilder.group({
 			_id: [''],
-			nome: [''],
-			porcentagem: new FormControl<number|null|undefined>(null),
-			valor: new FormControl<number|null|undefined>(null)
+			nome: ['',[Validators.required]],
+			porcentagem: new FormControl<number|null|undefined>(null, [Validators.required, Validators.pattern("^\d*\.?\d*$")]),
+			valor: new FormControl<number|null|undefined>(null, [Validators.required, Validators.pattern("^\d*\.?\d*$")])
 		});
 		
 	  nomes: string[] = [
@@ -71,6 +71,18 @@ export class SetorFormComponent {
 	
 	onError() {
 		this.snackBar.open('Erro ao salvar setor!', '', { duration: 5000 });
+	}
+	
+	getErrorMessage(fieldName: string) {
+		const field = this.form.get(fieldName);
+		if(field?.hasError('required')) {
+			return 'Campo obrigatório';
+		}
+		if(field?.hasError('pattern')) {
+			return 'Somente números';
+		}
+		
+		return 'Campo inválido';
 	}
 
 }
