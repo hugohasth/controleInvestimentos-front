@@ -9,5 +9,5 @@ export const setorResolver: ResolveFn<Setor> = (route, state, setorService = inj
 	if(route.params && route.params['id']) {
 		return setorService.loadById(route.params['id']);
 	}
-    return of({_id: '', nome: '', porcentagem: null, valor: null});
+    return of({_id: '', nome: '', porcentagem: null, valor: null, ativos: [] });
 };

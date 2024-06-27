@@ -15,3 +15,7 @@ button {
 .full-width {
 	width: 100%;
 }
+
+.form-array-error {
+	text-align: left;
+}

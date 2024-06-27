@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormBuilder, Validators, UntypedFormArray, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
 import { SetoresService } from '../../services/setores.service';
 import { Setor } from '../../model/setor';
 import { ActivatedRoute } from '@angular/router';
-import { MatSelectModule } from '@angular/material/select';
+import { Ativo } from '../../model/ativo';
+import { FormUtilsService } from 'src/app/shared/form/form-utils.service';
 
 @Component({
   selector: 'app-setor-form',
@@ -13,13 +14,8 @@ import { MatSelectModule } from '@angular/material/select';
   styleUrls: ['./setor-form.component.css']
 })
 export class SetorFormComponent {
-	
-	form = this.formBuilder.group({
-			_id: [''],
-			nome: ['',[Validators.required]],
-			porcentagem: new FormControl<number|null|undefined>(null, [Validators.required, Validators.pattern("^\d*\.?\d*$")]),
-			valor: new FormControl<number|null|undefined>(null, [Validators.required, Validators.pattern("^\d*\.?\d*$")])
-		});
+
+	form!: FormGroup;
 		
 	  nomes: string[] = [
 	    'AÇÕES (BRASIL)',
@@ -37,27 +33,64 @@ export class SetorFormComponent {
 		private service: SetoresService,
 		private snackBar: MatSnackBar,
 		private location: Location,
-		private route: ActivatedRoute) {
+		private route: ActivatedRoute,
+		public formUtils: FormUtilsService) {
 			
 	}
 	nome: string = '';
 	
 	ngOnInit(): void {
-		const setor: Setor = this.route.snapshot.data['setor'];
-		console.log(setor);
-		this.form.setValue({
-			_id: setor._id,
-			nome: setor.nome,
-			porcentagem: setor.porcentagem,
-			valor: setor.valor
-		})
+		const setor: Setor = this.route.snapshot.data['setor'];		
+	
+		this.form = this.formBuilder.group({
+			_id: [setor._id],
+			nome: [setor.nome, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+			porcentagem: new FormControl<number | null | undefined>(setor.porcentagem, [Validators.required, Validators.pattern("^[0-9]+(\.[0-9]{1,2})?$")]),
+			valor: new FormControl<number | null | undefined>(setor.valor, [Validators.required, Validators.pattern("^[0-9]+(\.[0-9]{1,2})?$")]),
+			ativos: this.formBuilder.array(this.retrieveAtivos(setor), Validators.required)
+		});
+	}
+
+	private retrieveAtivos(setor: Setor) {
+		const ativos = [];
+		if (setor?.ativos) {
+			setor.ativos.forEach(ativo => ativos.push(this.createAtivo(ativo)));
+		} else {
+			ativos.push(this.createAtivo());
+		}
+		return ativos;
+	}
+
+	private createAtivo(ativo: Ativo = { _id: '', nome: '', sigla: '', tipo: '', segmento: '' }) {
+		return this.formBuilder.group({
+			id: [ativo._id],
+			nome: [ativo.nome, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+			sigla: [ativo.sigla, [Validators.required]],
+			tipo: [ativo.tipo, [Validators.required]],
+			segmento: [ativo.segmento, [Validators.required]]
+		});
+	}
+	
+	addNewAtivo() {
+		const ativos = this.form.get('ativos') as UntypedFormArray;
+		ativos.push(this.createAtivo())
+	}
+	
+	removeAtivo(index: number) {
+		const ativos = this.form.get('ativos') as UntypedFormArray;
+		ativos.removeAt(index);
+	}
+
+	getAtivosFormArray() {
+		return (<UntypedFormArray>this.form.get('ativos')).controls;
 	}
 	
 	onSubmit() {
-		const idValue = this.form.value._id || undefined;
-		const nomeValue = this.form.value.nome || undefined;
-		const updatedValues = { ...this.form.value, _id:idValue, nome: nomeValue };
-		this.service.save(updatedValues).subscribe(result => this.onSucces(), error => this.onError());
+		if(this.form.valid) {
+			this.service.save(this.form.value).subscribe(result => this.onSucces(), error => this.onError());
+		} else {
+			this.formUtils.validateAllFormFields(this.form);
+		}
 	}
 	
 	onCancel() {
@@ -71,18 +104,6 @@ export class SetorFormComponent {
 	
 	onError() {
 		this.snackBar.open('Erro ao salvar setor!', '', { duration: 5000 });
-	}
-	
-	getErrorMessage(fieldName: string) {
-		const field = this.form.get(fieldName);
-		if(field?.hasError('required')) {
-			return 'Campo obrigatório';
-		}
-		if(field?.hasError('pattern')) {
-			return 'Somente números';
-		}
-		
-		return 'Campo inválido';
 	}
 
 }
