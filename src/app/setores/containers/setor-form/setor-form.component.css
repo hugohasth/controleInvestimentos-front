@@ -4,6 +4,13 @@ mat-card {
 	text-align: center;
 }
 
+mat-card-actions {
+	justify-content: center;
+}
+
+button {
+	margin: 0 0 5px 5px;
+}
 
 .full-width {
 	width: 100%;
