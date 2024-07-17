@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Setor } from '../model/setor';
 import { delay, first, tap } from 'rxjs';
+import { SetorPage } from '../model/setor-page';
 
 @Injectable({
 	providedIn: 'root'
@@ -14,8 +15,8 @@ export class SetoresService {
 
 	constructor(private httpClient : HttpClient) { }
 
-	list() {
-		return this.httpClient.get<Setor[]>(this.uri).pipe(first(), delay(10), tap(setores => console.log(setores)));
+	list(pageNumber = 0, pageSize = 10) {
+		return this.httpClient.get<SetorPage>(this.uri, {params: {pageNumber, pageSize}}).pipe(first(), delay(10), tap(setores => console.log(setores)));
 	}
 	
 	save(setor: Partial<Setor>) {

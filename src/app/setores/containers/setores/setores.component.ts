@@ -1,5 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { Observable, catchError, of } from 'rxjs';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Observable, catchError, of, tap } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { Router } from '@angular/router';
@@ -8,6 +8,8 @@ import { SetoresService } from '../../services/setores.service';
 import { Setor } from '../../model/setor';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
+import { SetorPage } from '../../model/setor-page';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-setores',
@@ -16,7 +18,12 @@ import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmat
 })
 export class SetoresComponent implements OnInit{
 	
-	setores$: Observable<Setor[]>|null = null;
+	setores$: Observable<SetorPage>|null = null;
+	
+	@ViewChild(MatPaginator) paginator!: MatPaginator;
+	
+	pageIndex = 0;
+	pageSize = 10;
 	
 	displayedColumns = ['nome','porcentagem','valor','actions'];
 	
@@ -29,11 +36,15 @@ export class SetoresComponent implements OnInit{
 			this.refresh();
 	}
 	
-	refresh() {
-		this.setores$ = this.setoresService.list().pipe(
+	refresh(pageEvent: PageEvent = {length: 0, pageIndex: 0, pageSize: 10}) {
+		this.setores$ = this.setoresService.list(pageEvent.pageIndex, pageEvent.pageSize).pipe(
+			tap(() => {
+				this.pageIndex = pageEvent.pageIndex;
+				this.pageSize = pageEvent.pageSize;
+			}),
 			catchError(error => {
 				this.onError('Erro ao carregar os setores!');
-				return of([])
+				return of({setores: [], totalElements: 0, totalPages: 0})
 			})
 		);
 	}

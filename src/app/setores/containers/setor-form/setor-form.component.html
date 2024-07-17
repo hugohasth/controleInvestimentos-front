@@ -7,15 +7,21 @@ do Setor</mat-toolbar> <mat-card-content>
 	option }}</mat-option> </mat-select> <mat-error *ngIf="form.get('nome')?.invalid">{{formUtils.getErrorMessage(form, 'nome')}}</mat-error>
 	</mat-form-field>
 
-	<mat-form-field class="full-width"> <mat-label>Porcentagem</mat-label>
-	<input matInput placeholder="Porcentagem" formControlName="porcentagem" type="number">
-	<mat-error *ngIf="form.get('porcentagem')?.invalid">{{formUtils.getErrorMessage(form, 'porcentagem')}}</mat-error>
-	</mat-form-field>
-
-	<mat-form-field class="full-width"> <mat-label>Valor</mat-label>
-	<input matInput placeholder="Valor" formControlName="valor" type="number"> <mat-error
-		*ngIf="form.get('valor')?.invalid">{{formUtils.getErrorMessage(form, 'valor')}}</mat-error>
-	</mat-form-field>
+	<div style="display: flex; gap: 5px;">
+		<div style="flex: 1;">
+			<mat-form-field class="full-width"> <mat-label>Porcentagem</mat-label>
+			<input matInput placeholder="Porcentagem" formControlName="porcentagem" type="number">
+			<mat-error *ngIf="form.get('porcentagem')?.invalid">{{formUtils.getErrorMessage(form, 'porcentagem')}}</mat-error>
+			</mat-form-field>
+		</div>
+	
+		<div style="flex: 1;">
+			<mat-form-field class="full-width"> <mat-label>Valor</mat-label>
+			<input matInput placeholder="Valor" formControlName="valor" type="number"> <mat-error
+				*ngIf="form.get('valor')?.invalid">{{formUtils.getErrorMessage(form, 'valor')}}</mat-error>
+			</mat-form-field>
+		</div>
+	</div>
 
 
 	<mat-toolbar> <span>Ativos</span>
