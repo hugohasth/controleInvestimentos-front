@@ -61,10 +61,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "controleInvestimentos-front:build:production"
+              "buildTarget": "controleInvestimentos-front:build:production"
             },
             "development": {
-              "browserTarget": "controleInvestimentos-front:build:development"
+              "buildTarget": "controleInvestimentos-front:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -72,7 +72,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "controleInvestimentos-front:build"
+            "buildTarget": "controleInvestimentos-front:build"
           }
         },
         "test": {
