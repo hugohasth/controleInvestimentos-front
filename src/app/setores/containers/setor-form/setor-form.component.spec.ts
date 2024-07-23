@@ -8,8 +8,8 @@ describe('SetorFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SetorFormComponent ]
-    })
+    imports: [SetorFormComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(SetorFormComponent);

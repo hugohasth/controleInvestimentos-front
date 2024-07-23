@@ -10,11 +10,18 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { SetorPage } from '../../model/setor-page';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { SetoresListComponent } from '../../components/setores-list/setores-list.component';
+import { AsyncPipe } from '@angular/common';
+import { MatToolbar } from '@angular/material/toolbar';
+import { MatCard } from '@angular/material/card';
 
 @Component({
-  selector: 'app-setores',
-  templateUrl: './setores.component.html',
-  styleUrls: ['./setores.component.css']
+    selector: 'app-setores',
+    templateUrl: './setores.component.html',
+    styleUrls: ['./setores.component.css'],
+    standalone: true,
+    imports: [MatCard, MatToolbar, SetoresListComponent, MatPaginator, MatProgressSpinner, AsyncPipe]
 })
 export class SetoresComponent implements OnInit{
 	
