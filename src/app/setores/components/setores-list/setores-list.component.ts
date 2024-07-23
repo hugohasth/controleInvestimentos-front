@@ -1,10 +1,16 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Setor } from '../../model/setor';
+import { SetorPipe } from '../../../shared/pipes/setor.pipe';
+import { MatMiniFabButton, MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
 
 @Component({
-	selector: 'app-setores-list',
-	templateUrl: './setores-list.component.html',
-	styleUrls: ['./setores-list.component.css']
+    selector: 'app-setores-list',
+    templateUrl: './setores-list.component.html',
+    styleUrls: ['./setores-list.component.css'],
+    standalone: true,
+    imports: [MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatIcon, MatMiniFabButton, MatIconButton, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, SetorPipe]
 })
 export class SetoresListComponent {
 

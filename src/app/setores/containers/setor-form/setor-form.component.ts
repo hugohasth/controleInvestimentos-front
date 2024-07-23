@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormBuilder, Validators, UntypedFormArray, FormGroup } from '@angular/forms';
+import { FormControl, FormBuilder, Validators, UntypedFormArray, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
 import { SetoresService } from '../../services/setores.service';
@@ -7,11 +7,21 @@ import { Setor } from '../../model/setor';
 import { ActivatedRoute } from '@angular/router';
 import { Ativo } from '../../model/ativo';
 import { FormUtilsService } from 'src/app/shared/form/form-utils.service';
+import { MatIcon } from '@angular/material/icon';
+import { MatIconButton, MatButton } from '@angular/material/button';
+import { MatInput } from '@angular/material/input';
+import { MatOption } from '@angular/material/core';
+import { MatSelect } from '@angular/material/select';
+import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
+import { MatToolbar } from '@angular/material/toolbar';
+import { MatCard, MatCardContent, MatCardActions } from '@angular/material/card';
 
 @Component({
-  selector: 'app-setor-form',
-  templateUrl: './setor-form.component.html',
-  styleUrls: ['./setor-form.component.css']
+    selector: 'app-setor-form',
+    templateUrl: './setor-form.component.html',
+    styleUrls: ['./setor-form.component.css'],
+    standalone: true,
+    imports: [MatCard, MatToolbar, MatCardContent, ReactiveFormsModule, MatFormField, MatLabel, MatSelect, MatOption, MatError, MatInput, MatIconButton, MatIcon, MatCardActions, MatButton]
 })
 export class SetorFormComponent {
 
