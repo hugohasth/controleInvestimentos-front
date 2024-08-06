@@ -14,7 +14,7 @@ do Setor</mat-toolbar> <mat-card-content>
 <div style="display: flex; gap: 5px;">
   <div style="flex: 1;">
     <mat-form-field class="full-width"> <mat-label>Porcentagem</mat-label>
-    <input matInput placeholder="Porcentagem" formControlName="porcentagem" type="number">
+    <input matInput placeholder="Porcentagem" formControlName="porcentagem" type="text" mask="percent" suffix="%">
     @if (form.get('porcentagem')?.invalid) {
       <mat-error>{{formUtils.getErrorMessage(form, 'porcentagem')}}</mat-error>
     }
@@ -23,7 +23,7 @@ do Setor</mat-toolbar> <mat-card-content>
 
 <div style="flex: 1;">
   <mat-form-field class="full-width"> <mat-label>Valor</mat-label>
-  <input matInput placeholder="Valor" formControlName="valor" type="number"> @if (form.get('valor')?.invalid) {
+  <input matInput placeholder="Valor" formControlName="valor" type="text" mask="separator.2" prefix="R$" thousandSeparator="." decimalMarker=","> @if (form.get('valor')?.invalid) {
   <mat-error
   >{{formUtils.getErrorMessage(form, 'valor')}}</mat-error>
 }

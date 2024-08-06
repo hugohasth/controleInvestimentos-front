@@ -15,13 +15,14 @@ import { MatSelect } from '@angular/material/select';
 import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatCard, MatCardContent, MatCardActions } from '@angular/material/card';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 @Component({
     selector: 'app-setor-form',
     templateUrl: './setor-form.component.html',
     styleUrls: ['./setor-form.component.css'],
     standalone: true,
-    imports: [MatCard, MatToolbar, MatCardContent, ReactiveFormsModule, MatFormField, MatLabel, MatSelect, MatOption, MatError, MatInput, MatIconButton, MatIcon, MatCardActions, MatButton]
+    imports: [MatCard, MatToolbar, MatCardContent, ReactiveFormsModule, MatFormField, MatLabel, MatSelect, MatOption, MatError, MatInput, MatIconButton, MatIcon, MatCardActions, MatButton, NgxMaskDirective, NgxMaskPipe]
 })
 export class SetorFormComponent {
 

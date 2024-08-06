@@ -11,13 +11,13 @@
 	<!-- Porcentagem Column -->
 	<ng-container matColumnDef="porcentagem">
 		<mat-header-cell *matHeaderCellDef>Porcentagem</mat-header-cell>
-		<mat-cell *matCellDef="let element">{{element.porcentagem}}</mat-cell>
+		<mat-cell *matCellDef="let element">{{element.porcentagem / 100 | percent:'1.2-2'}}</mat-cell>
 	</ng-container>
 
 	<!-- Valor Column -->
 	<ng-container matColumnDef="valor">
 		<mat-header-cell *matHeaderCellDef>Valor</mat-header-cell>
-		<mat-cell *matCellDef="let element">{{element.valor}}</mat-cell>
+		<mat-cell *matCellDef="let element">{{element.valor | currency:'BRL':'symbol':'1.2-2'}}</mat-cell>
 	</ng-container>
 
 	<!-- Actions Column -->

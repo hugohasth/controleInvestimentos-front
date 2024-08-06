@@ -8,8 +8,8 @@ export class SetorPipe implements PipeTransform {
 
   transform(value: string): string {
 	  switch(value) {
-		  case 'AÇÕES (BRASIL)': return 'public';
-		  case 'AÇÕES (USA)': return 'reorder';
+		  case 'AÇÕES (BRASIL)': return 'trending_up';
+		  case 'AÇÕES (USA)': return 'monitoring';
 	  }
     return 'unknown_document';
   }
