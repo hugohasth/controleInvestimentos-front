@@ -1,4 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SetoresComponent } from './setores.component';
 
@@ -8,7 +13,7 @@ describe('SetoresComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [SetoresComponent]
+    imports: [SetoresComponent, HttpClientTestingModule, RouterTestingModule, MatSnackBarModule, MatDialogModule, NoopAnimationsModule]
 })
     .compileComponents();
 
