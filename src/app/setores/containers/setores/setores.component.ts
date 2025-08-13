@@ -20,7 +20,6 @@ import { MatCard } from '@angular/material/card';
     selector: 'app-setores',
     templateUrl: './setores.component.html',
     styleUrls: ['./setores.component.css'],
-    standalone: true,
     imports: [MatCard, MatToolbar, SetoresListComponent, MatPaginator, MatProgressSpinner, AsyncPipe]
 })
 export class SetoresComponent implements OnInit{

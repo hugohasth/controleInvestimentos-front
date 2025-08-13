@@ -7,7 +7,6 @@ import { CdkScrollable } from '@angular/cdk/scrolling';
     selector: 'app-confirmation-dialog',
     templateUrl: './confirmation-dialog.component.html',
     styleUrls: ['./confirmation-dialog.component.css'],
-    standalone: true,
     imports: [CdkScrollable, MatDialogContent, MatDialogActions, MatButton]
 })
 export class ConfirmationDialogComponent implements OnInit {
