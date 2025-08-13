@@ -20,7 +20,6 @@ import { MatCard, MatCardContent, MatCardActions } from '@angular/material/card'
     selector: 'app-setor-form',
     templateUrl: './setor-form.component.html',
     styleUrls: ['./setor-form.component.css'],
-    standalone: true,
     imports: [MatCard, MatToolbar, MatCardContent, ReactiveFormsModule, MatFormField, MatLabel, MatSelect, MatOption, MatError, MatInput, MatIconButton, MatIcon, MatCardActions, MatButton]
 })
 export class SetorFormComponent {

@@ -7,7 +7,6 @@ import { CdkScrollable } from '@angular/cdk/scrolling';
     selector: 'app-error-dialog',
     templateUrl: './error-dialog.component.html',
     styleUrls: ['./error-dialog.component.css'],
-    standalone: true,
     imports: [MatDialogTitle, CdkScrollable, MatDialogContent, MatDialogActions, MatButton, MatDialogClose]
 })
 export class ErrorDialogComponent implements OnInit {
